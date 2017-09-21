@@ -1,0 +1,18 @@
+<html>
+    <head>
+        <script src="../dist/rexjs.js"></script>
+        <script>
+            let rexjs = new RexJS({
+                websocketUrl: 'ws://localhost:4000/rexjs'
+            })
+            rexjs.bindModule("public", 'a', function(data) {
+                console.log(data)
+                document.querySelector('.data').innerHTML = data
+            })
+        </script>
+    </head>
+    <body>
+        Value:<br />
+        <div class="data"></div>
+    </body>
+</html>
