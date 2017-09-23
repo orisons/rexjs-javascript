@@ -5,6 +5,12 @@ const defaults = {
 }
 
 class RexJS {
+
+    /**
+     * Create RexJS instance
+     * @param {Object} options
+     * @return {RexJS} RexJS instance
+     */
     constructor(opts) {
         this._options = Object.assign({}, defaults, opts)
         if (typeof WebSocket == typeof undefined) {
@@ -18,6 +24,13 @@ class RexJS {
         }
     }
 
+    /**
+     * Bind watch on 'module' in 'worker'
+     * @param {String} worker
+     * @param {String} module
+     * @param {Function} callback
+     * @return {RexJS} Module instance
+     */
     bindModule(worker, module, callback) {
         if (typeof worker == typeof undefined) {
             console.error('[RexJS] worker not presented!')
