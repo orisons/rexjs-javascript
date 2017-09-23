@@ -1,5 +1,5 @@
 /*!
- * RexJS v1.0.0
+ * RexJS v0.1.0
  * (c) 2017 nerdslabs
  * Released under the MIT License.
  */
@@ -19,7 +19,118 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
 
 
+var asyncGenerator = function () {
+  function AwaitValue(value) {
+    this.value = value;
+  }
 
+  function AsyncGenerator(gen) {
+    var front, back;
+
+    function send(key, arg) {
+      return new Promise(function (resolve, reject) {
+        var request = {
+          key: key,
+          arg: arg,
+          resolve: resolve,
+          reject: reject,
+          next: null
+        };
+
+        if (back) {
+          back = back.next = request;
+        } else {
+          front = back = request;
+          resume(key, arg);
+        }
+      });
+    }
+
+    function resume(key, arg) {
+      try {
+        var result = gen[key](arg);
+        var value = result.value;
+
+        if (value instanceof AwaitValue) {
+          Promise.resolve(value.value).then(function (arg) {
+            resume("next", arg);
+          }, function (arg) {
+            resume("throw", arg);
+          });
+        } else {
+          settle(result.done ? "return" : "normal", result.value);
+        }
+      } catch (err) {
+        settle("throw", err);
+      }
+    }
+
+    function settle(type, value) {
+      switch (type) {
+        case "return":
+          front.resolve({
+            value: value,
+            done: true
+          });
+          break;
+
+        case "throw":
+          front.reject(value);
+          break;
+
+        default:
+          front.resolve({
+            value: value,
+            done: false
+          });
+          break;
+      }
+
+      front = front.next;
+
+      if (front) {
+        resume(front.key, front.arg);
+      } else {
+        back = null;
+      }
+    }
+
+    this._invoke = send;
+
+    if (typeof gen.return !== "function") {
+      this.return = undefined;
+    }
+  }
+
+  if (typeof Symbol === "function" && Symbol.asyncIterator) {
+    AsyncGenerator.prototype[Symbol.asyncIterator] = function () {
+      return this;
+    };
+  }
+
+  AsyncGenerator.prototype.next = function (arg) {
+    return this._invoke("next", arg);
+  };
+
+  AsyncGenerator.prototype.throw = function (arg) {
+    return this._invoke("throw", arg);
+  };
+
+  AsyncGenerator.prototype.return = function (arg) {
+    return this._invoke("return", arg);
+  };
+
+  return {
+    wrap: function (fn) {
+      return function () {
+        return new AsyncGenerator(fn.apply(this, arguments));
+      };
+    },
+    await: function (value) {
+      return new AwaitValue(value);
+    }
+  };
+}();
 
 
 
@@ -127,6 +238,12 @@ var defaults = {
 };
 
 var RexJS$1 = function () {
+
+    /**
+     * Create RexJS instance
+     * @param {Object} options
+     * @return {RexJS} RexJS instance
+     */
     function RexJS(opts) {
         classCallCheck(this, RexJS);
 
@@ -141,6 +258,15 @@ var RexJS$1 = function () {
             return;
         }
     }
+
+    /**
+     * Bind watch on 'module' in 'worker'
+     * @param {String} worker
+     * @param {String} module
+     * @param {Function} callback
+     * @return {RexJS} Module instance
+     */
+
 
     createClass(RexJS, [{
         key: 'bindModule',
@@ -161,7 +287,7 @@ var RexJS$1 = function () {
     return RexJS;
 }();
 
-RexJS$1.version = '1.0.0';
+RexJS$1.version = '0.1.0';
 
 return RexJS$1;
 
