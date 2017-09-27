@@ -1,5 +1,4 @@
-<img src="https://cdn.rawgit.com/orisons/assets/master/rexjs-logo.svg
-" width="300px">
+<img src="https://cdn.rawgit.com/orisons/assets/master/rexjs-logo.svg" width="300px">
 
 # rexjs-javascript
 
