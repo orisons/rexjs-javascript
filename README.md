@@ -1,6 +1,6 @@
-<img src="https://cdn.rawgit.com/orisons/assets/master/rexjs-logo.svg" width="300px">
+# RexJS - javascript
 
-# rexjs-javascript
+[![Travis](https://travis-ci.org/orisons/rexjs-javascript.svg?branch=master)](https://travis-ci.org/orisons/rexjs-javascript)
 
 **RexJS is library for reactivity between elixir data with front-end through javascript websockets.**
 
@@ -20,14 +20,14 @@ Add `rexjs` to your list of dependencies:
 **Command line**
 ```
 # with yarn
-yarn add rexjs --dev
+yarn add rexjs-javascript --dev
 # with npm
-npm install rexjs --dev
+npm install rexjs-javascript --dev
 ```
 
 **File `package.json`**
 ```json
-    "rexjs": "^0.0.1"
+"rexjs-javascript": "^0.0.1"
 ```
 
 ## Usage
@@ -35,7 +35,7 @@ npm install rexjs --dev
 **Create RexJS instance**
 ```javascript
 let rexjs = new RexJS({
-    websocketUrl: 'ws://domain.com/rexjs'
+    websocketUrl: 'ws://localhost/rexjs'
 })
 ```
 

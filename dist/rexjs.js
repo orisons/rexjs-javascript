@@ -1,5 +1,5 @@
 /*!
- * RexJS v0.0.1
+ * RexJS v0.1.0
  * (c) 2017 nerdslabs
  * Released under the MIT License.
  */
@@ -234,7 +234,7 @@ var Module = function () {
 }();
 
 var defaults = {
-    env: "development"
+    env: "production"
 };
 
 var RexJS$1 = function () {
@@ -287,7 +287,7 @@ var RexJS$1 = function () {
     return RexJS;
 }();
 
-RexJS$1.version = '0.0.1';
+RexJS$1.version = '0.1.0';
 
 return RexJS$1;
 
