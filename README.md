@@ -27,7 +27,7 @@ npm install rexjs-javascript --dev
 
 **File `package.json`**
 ```json
-"rexjs-javascript": "^0.0.1"
+"rexjs-javascript": "^0.1.0"
 ```
 
 ## Usage
