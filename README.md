@@ -20,9 +20,9 @@ Add `rexjs` to your list of dependencies:
 **Command line**
 ```
 # with yarn
-yarn add rexjs-javascript --dev
+yarn add rexjs-javascript --save
 # with npm
-npm install rexjs-javascript --dev
+npm install rexjs-javascript --save
 ```
 
 **File `package.json`**
